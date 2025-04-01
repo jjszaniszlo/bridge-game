@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55b036c9-ed96-4d12-a98c-c18f2f7742b0" name="Changes" comment="" />
+    <list default="true" id="55b036c9-ed96-4d12-a98c-c18f2f7742b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.bridge-game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bridge-game/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameModels/Road/road.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameModels/Road/road.png.meta" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +97,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743462318066</updated>
-      <workItem from="1743462320564" duration="2432000" />
+      <workItem from="1743462320564" duration="4403000" />
     </task>
     <servers />
   </component>
