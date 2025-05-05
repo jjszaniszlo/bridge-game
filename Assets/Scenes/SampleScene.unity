@@ -4311,8 +4311,11 @@ MonoBehaviour:
   vehicleFinishPoint: {fileID: 8550648678571598460, guid: 1f8a78c8b862648899a361b629d6c942,
     type: 3}
   levelCompletePanel: {fileID: 1364588493}
-  nextButton: {fileID: 475186102}
   levelCompleteText: {fileID: 454877629}
+  nextButton: {fileID: 475186102}
+  gameOverPanel: {fileID: 412986114}
+  restartButton: {fileID: 423918789}
+  arMenuManager: {fileID: 2099970472}
 --- !u!4 &1039355953
 Transform:
   m_ObjectHideFlags: 0

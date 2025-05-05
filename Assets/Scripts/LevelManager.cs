@@ -1,9 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;              
-using TMPro;                   
+using UnityEngine.UI;
+using System.Collections;
+using TMPro;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets; 
 
 [System.Serializable]
-public class LevelConfig {
+public class LevelConfig
+{
     public string levelName;
 }
 
@@ -21,10 +24,16 @@ public class LevelManager : MonoBehaviour
     public Transform vehicleFinishPoint;
 
     [Header("UI")]
-    public GameObject levelCompletePanel;    
-    // public Text levelCompleteText;           
-    public Button nextButton;                
-    public TextMeshProUGUI levelCompleteText; 
+    public GameObject levelCompletePanel;
+    public TextMeshProUGUI levelCompleteText;
+    public Button nextButton;
+
+    [Header("Game Over UI")]
+    public GameObject gameOverPanel;
+    public Button restartButton;
+
+    [Header("AR Template")]
+    public ARTemplateMenuManager arMenuManager;
 
     // State flags
     private bool levelStarted  = false;
@@ -38,26 +47,32 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        // hide UI on launch
+        // Hide all panels/buttons initially
         levelCompletePanel.SetActive(false);
         nextButton.gameObject.SetActive(false);
+        gameOverPanel.SetActive(false);
+        restartButton.gameObject.SetActive(false);
 
-        // wire up the NextButton
+        // Wire UI callbacks
         nextButton.onClick.AddListener(AdvanceLevel);
+        restartButton.onClick.AddListener(RestartGame);
     }
 
-    /// Called by “Start Game” button in the scene
+    /// <summary>
+    /// Called by “Start Game” UI button.
+    /// </summary>
     public void OnGameStartButtonClicked()
     {
         if (!levelStarted)
         {
             levelStarted = true;
-            Debug.Log("Game started!");
             StartLevel();
         }
     }
 
-    /// Called by “Test Bridge” button in the scene
+    /// <summary>
+    /// Called by “Test Bridge” UI button.
+    /// </summary>
     public void OnTestButtonClicked()
     {
         if (!levelStarted)
@@ -76,14 +91,15 @@ public class LevelManager : MonoBehaviour
     {
         if (currentLevelIndex >= levels.Length)
         {
-            Debug.Log("All levels completed!");
+            // No more levels → Game Over
+            ShowGameOverUI();
             return;
         }
 
         var lvl = levels[currentLevelIndex];
         Debug.Log("Starting Level: " + lvl.levelName);
 
-        // reset the Test Bridge button for this level
+        // Reset per‐level state
         testTriggered = false;
     }
 
@@ -102,17 +118,21 @@ public class LevelManager : MonoBehaviour
             tester.startPoint  = vehicleStartPoint;
             tester.finishPoint = vehicleFinishPoint;
         }
-        else Debug.LogError("Vehicle prefab missing VehicleTester component");
+        else
+        {
+            Debug.LogError("Vehicle prefab missing VehicleTester component");
+        }
     }
 
-    // Called by VehicleTester when the vehicle reaches the finish point
+    /// <summary>
+    /// Called by VehicleTester when the vehicle reaches the finish point.
+    /// </summary>
     public void CompleteLevel()
     {
         Debug.Log("Level completed: " + levels[currentLevelIndex].levelName);
         ShowLevelCompleteUI();
     }
 
-    // Display the panel and NextLevel button
     void ShowLevelCompleteUI()
     {
         levelCompleteText.text        = $"Level {currentLevelIndex + 1} Complete!";
@@ -121,17 +141,59 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Called by the NextButton to proceed to the next level
+    /// Called by the Next Level button to proceed.
     /// </summary>
     public void AdvanceLevel()
     {
-        // hide the UI
+        // Hide Level Complete UI
         levelCompletePanel.SetActive(false);
         nextButton.gameObject.SetActive(false);
 
-        // increment and start the next level
+        // Advance the index
         currentLevelIndex++;
-        testTriggered = false;
+
+        if (currentLevelIndex >= levels.Length)
+        {
+            ShowGameOverUI();
+        }
+        else
+        {
+            // Clear all placed objects via the AR template’s built-in method
+            if (arMenuManager != null)
+                arMenuManager.ClearAllObjects();
+
+            testTriggered = false;
+            StartLevel();
+        }
+    }
+
+    void ShowGameOverUI()
+    {
+        Debug.Log("All levels finished. Game Over!");
+        gameOverPanel.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Called by the Restart button to reset the game.
+    /// </summary>
+    public void RestartGame()
+    {
+        // Hide Game Over UI
+        gameOverPanel.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+
+        // Reset state
+        currentLevelIndex = 0;
+        levelStarted      = false;
+        testTriggered     = false;
+
+        // Clear any remaining objects via the AR template
+        if (arMenuManager != null)
+            arMenuManager.ClearAllObjects();
+
+        // Automatically start first level so Test Bridge works immediately
+        levelStarted = true;
         StartLevel();
     }
 }
