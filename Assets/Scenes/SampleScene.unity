@@ -4480,7 +4480,7 @@ MonoBehaviour:
   levels:
   - levelName: Level 1
   - levelName: Level 2
-  vehiclePrefab: {fileID: 3837183301347961130, guid: d54990f040f694c2a8c5822984d054a8,
+  vehiclePrefab: {fileID: 8296567065558288078, guid: 03d42159469984d219ca6da8620a087a,
     type: 3}
   vehicleStartPoint: {fileID: 1631852440423413380, guid: e92e009c634844f2fb7de5b92f9da64d,
     type: 3}
