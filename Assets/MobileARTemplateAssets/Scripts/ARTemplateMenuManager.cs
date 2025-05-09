@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,6 +16,16 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 /// </summary>
 public class ARTemplateMenuManager : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("Button that extends a bridge")]
+    private Button m_ExtendButton;
+    
+    public Button extendButton 
+    {
+        get => m_ExtendButton;
+        set => m_ExtendButton = value;
+    }
+    
     [SerializeField]
     [Tooltip("Button that opens the create menu.")]
     Button m_CreateButton;
@@ -226,6 +237,7 @@ public class ARTemplateMenuManager : MonoBehaviour
         m_CreateButton.onClick.AddListener(ShowMenu);
         m_CancelButton.onClick.AddListener(HideMenu);
         m_DeleteButton.onClick.AddListener(DeleteFocusedObject);
+        m_ExtendButton.onClick.AddListener(ExtendBridgeObject);
         m_PlaneManager.trackablesChanged.AddListener(OnPlaneChanged);
     }
 
@@ -238,6 +250,7 @@ public class ARTemplateMenuManager : MonoBehaviour
         m_CreateButton.onClick.RemoveListener(ShowMenu);
         m_CancelButton.onClick.RemoveListener(HideMenu);
         m_DeleteButton.onClick.RemoveListener(DeleteFocusedObject);
+        m_ExtendButton.onClick.RemoveListener(ExtendBridgeObject);
         m_PlaneManager.trackablesChanged.RemoveListener(OnPlaneChanged);
     }
 
@@ -281,10 +294,12 @@ public class ARTemplateMenuManager : MonoBehaviour
             if (m_ShowObjectMenu)
             {
                 m_DeleteButton.gameObject.SetActive(false);
+                m_ExtendButton.gameObject.SetActive(false);
             }
             else
             {
                 m_DeleteButton.gameObject.SetActive(m_InteractionGroup?.focusInteractable != null);
+                m_ExtendButton.gameObject.SetActive(m_InteractionGroup?.focusInteractable != null);
             }
 
             m_IsPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1);
@@ -294,6 +309,7 @@ public class ARTemplateMenuManager : MonoBehaviour
             m_IsPointerOverUI = false;
             m_CreateButton.gameObject.SetActive(true);
             m_DeleteButton.gameObject.SetActive(m_InteractionGroup?.focusInteractable != null);
+            m_ExtendButton.gameObject.SetActive(m_InteractionGroup?.focusInteractable != null);
         }
 
         if (!m_IsPointerOverUI && m_ShowOptionsModal)
@@ -427,6 +443,15 @@ public class ARTemplateMenuManager : MonoBehaviour
         if (currentFocusedObject != null)
         {
             Destroy(currentFocusedObject.transform.gameObject);
+        }
+    }
+
+    void ExtendBridgeObject()
+    {
+        var curentFocusedObj = m_InteractionGroup.focusInteractable;
+        if (curentFocusedObj != null)
+        {
+            Debug.Log("Extending bridge object");
         }
     }
 
