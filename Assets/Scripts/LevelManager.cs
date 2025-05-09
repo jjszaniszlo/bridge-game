@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets; 
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 [System.Serializable]
 public class LevelConfig
 {
     public string levelName;
+    public int startingBudget;
 }
 
 public class LevelManager : MonoBehaviour
@@ -36,7 +37,7 @@ public class LevelManager : MonoBehaviour
     public ARTemplateMenuManager arMenuManager;
 
     // State flags
-    private bool levelStarted  = false;
+    private bool levelStarted = false;
     private bool testTriggered = false;
 
     void Awake()
@@ -87,6 +88,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the next level, including initializing the budget.
+    /// </summary>
     void StartLevel()
     {
         if (currentLevelIndex >= levels.Length)
@@ -98,6 +102,10 @@ public class LevelManager : MonoBehaviour
 
         var lvl = levels[currentLevelIndex];
         Debug.Log("Starting Level: " + lvl.levelName);
+
+        // initialize budget for this level
+        if (BudgetManager.Instance != null)
+            BudgetManager.Instance.InitBudget(lvl.startingBudget);
 
         // Reset per‐level state
         testTriggered = false;
@@ -112,10 +120,10 @@ public class LevelManager : MonoBehaviour
         }
 
         var vehicle = Instantiate(vehiclePrefab, vehicleStartPoint.position, Quaternion.identity);
-        var tester  = vehicle.GetComponent<VehicleTester>();
+        var tester = vehicle.GetComponent<VehicleTester>();
         if (tester != null)
         {
-            tester.startPoint  = vehicleStartPoint;
+            tester.startPoint = vehicleStartPoint;
             tester.finishPoint = vehicleFinishPoint;
         }
         else
@@ -135,7 +143,7 @@ public class LevelManager : MonoBehaviour
 
     void ShowLevelCompleteUI()
     {
-        levelCompleteText.text        = $"Level {currentLevelIndex + 1} Complete!";
+        levelCompleteText.text = $"Level {currentLevelIndex + 1} Complete!";
         levelCompletePanel.SetActive(true);
         nextButton.gameObject.SetActive(true);
     }
@@ -159,8 +167,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             // Clear all placed objects via the AR template’s built-in method
-            if (arMenuManager != null)
-                arMenuManager.ClearAllObjects();
+            arMenuManager?.ClearAllObjects();
 
             testTriggered = false;
             StartLevel();
@@ -176,6 +183,7 @@ public class LevelManager : MonoBehaviour
 
     /// <summary>
     /// Called by the Restart button to reset the game.
+    /// Immediately starts Level 1 so Test Bridge works right away.
     /// </summary>
     public void RestartGame()
     {
@@ -185,14 +193,13 @@ public class LevelManager : MonoBehaviour
 
         // Reset state
         currentLevelIndex = 0;
-        levelStarted      = false;
-        testTriggered     = false;
+        levelStarted = false;
+        testTriggered = false;
 
         // Clear any remaining objects via the AR template
-        if (arMenuManager != null)
-            arMenuManager.ClearAllObjects();
+        arMenuManager?.ClearAllObjects();
 
-        // Automatically start first level so Test Bridge works immediately
+        // Start first level automatically
         levelStarted = true;
         StartLevel();
     }
