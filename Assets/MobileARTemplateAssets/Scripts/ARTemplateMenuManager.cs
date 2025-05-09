@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -429,7 +430,7 @@ public class ARTemplateMenuManager : MonoBehaviour
             Destroy(currentFocusedObject.transform.gameObject);
         }
     }
-
+    
     void InitializeDebugMenuOffsets()
     {
         if (m_CreateButton.TryGetComponent<RectTransform>(out var buttonRect))
