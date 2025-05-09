@@ -11,6 +11,11 @@ public class BridgeExtendable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void Extend()
+    {
+        Debug.Log("Extend");
     }
 }

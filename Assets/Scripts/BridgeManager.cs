@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
@@ -11,11 +13,10 @@ public class BridgeManager : MonoBehaviour
     
     [Header("XR Related")]
     public XRInteractionGroup xrInteractionGroup;
-
-    private GameObject currentSelectedBridge;
-
+    
     private void Update()
     {
+        HandleExtendButtonVisibility();
     }
 
     /// <summary>
@@ -23,6 +24,30 @@ public class BridgeManager : MonoBehaviour
     /// </summary>
     private void HandleExtendButtonVisibility()
     {
-        var focusedObject = xrInteractionGroup?.focusInteractable;
+        var interactable = xrInteractionGroup?.focusInteractable;
+        if (interactable != null)
+        {
+            extendButton.gameObject.SetActive(interactable.transform.gameObject.GetComponent<BridgeExtendable>() != null);
+        }
+        else
+        {
+            extendButton.gameObject.SetActive(false);
+        }
+    }
+    
+    /// <summary>
+    /// Propagate Extend to the selected bridge object.
+    /// </summary>
+    public void ExtendBridgeButton()
+    {
+        var interactable = xrInteractionGroup?.focusInteractable;
+        if (interactable != null)
+        {
+            var obj = interactable.transform.gameObject;
+            if (obj.TryGetComponent<BridgeExtendable>(out var bridgeExtendable))
+            {
+                bridgeExtendable.Extend();
+            }
+        }
     }
 }

@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="55b036c9-ed96-4d12-a98c-c18f2f7742b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bridge-game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bridge-game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameModels/Bridge/bridge.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameModels/Bridge/bridge.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MobileARTemplateAssets/Scripts/ARTemplateMenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MobileARTemplateAssets/Scripts/ARTemplateMenuManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BridgeExtendable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BridgeExtendable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BridgeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BridgeManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +31,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///home/jjszaniszlo/Development/Games/bridge-game/Assets/MobileARTemplateAssets/Scripts/ARTemplateMenuManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.interaction.toolkit@9b07900cb163/Runtime/Interaction/Interactables/XRGrabInteractable.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -119,7 +120,7 @@
       <updated>1743462318066</updated>
       <workItem from="1743462320564" duration="4403000" />
       <workItem from="1746752767576" duration="46000" />
-      <workItem from="1746752828314" duration="3174000" />
+      <workItem from="1746752828314" duration="4458000" />
     </task>
     <servers />
   </component>

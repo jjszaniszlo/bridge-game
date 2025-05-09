@@ -5644,6 +5644,8 @@ CanvasRenderer:
   m_Script: {fileID: 11500000, guid: 946a2cbdcd8b7f47999c22fffdbbec0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extendButton: {fileID: 44357322}
+  xrInteractionGroup: {fileID: 2001374502}
 --- !u!4 &1212975187
 Transform:
   m_ObjectHideFlags: 0
