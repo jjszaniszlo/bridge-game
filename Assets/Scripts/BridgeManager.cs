@@ -36,7 +36,7 @@ public class BridgeManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Propagate Extend to the selected bridge object.
+    /// Propagate Extend to the selected bridge root object.
     /// </summary>
     public void ExtendBridgeButton()
     {
@@ -47,6 +47,22 @@ public class BridgeManager : MonoBehaviour
             if (obj.TryGetComponent<BridgeExtendable>(out var bridgeExtendable))
             {
                 bridgeExtendable.Extend();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Propagate removing a segment to the selected bridge root object.
+    /// </summary>
+    public void RemoveLastBridgeSegmentButton()
+    {
+        var interactable = xrInteractionGroup?.focusInteractable;
+        if (interactable != null)
+        {
+            var obj = interactable.transform.gameObject;
+            if (obj.TryGetComponent<BridgeExtendable>(out var bridgeExtendable))
+            {
+                bridgeExtendable.RemoveLast();
             }
         }
     }
