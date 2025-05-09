@@ -11,6 +11,15 @@ public class BridgeExtendable : MonoBehaviour
     private BridgeNode _head;
     private BridgeNode _tail;
     private int _segmentCount;
+
+    /// <summary>
+    /// Returns whether or not there are segments on this bridge root.
+    /// </summary>
+    /// <returns>true if it has segments, false otherwise</returns>
+    public bool HasSegments()
+    {
+        return _segmentCount > 0;
+    }
     
     /// <summary>
     /// Spawns the extension bridge and progresses the tail on the linked list.
@@ -36,9 +45,15 @@ public class BridgeExtendable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes the furthest away bridge segment.
+    /// </summary>
     public void RemoveLast()
     {
         if (_head == null || _tail == null) return;
+        
+        _segmentCount--;
+        
         if (_head == _tail)
         {
             Destroy(_head.gameObject);
