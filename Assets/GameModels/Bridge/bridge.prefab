@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 3617252324604875471}
   - component: {fileID: 795638535424445994}
   - component: {fileID: 877109698427569238}
+  - component: {fileID: 1898790340896235268}
   m_Layer: 0
   m_Name: bridge
   m_TagString: Untagged
@@ -662,6 +663,18 @@ MonoBehaviour:
   m_Elasticity: 0.15
   m_EnableElasticBreakLimit: 1
   m_ElasticBreakLimit: 0.5
+--- !u!114 &1898790340896235268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182553643729689219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd5f43e0c21915f4bf6c5e7a52dd5b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6157262826590095107
 GameObject:
   m_ObjectHideFlags: 0
