@@ -10,6 +10,7 @@ public class BridgeManager : MonoBehaviour
 {
     [Header("UI")]
     public Button extendButton;
+    public Button removeLastButton;
     
     [Header("XR Related")]
     public XRInteractionGroup xrInteractionGroup;
@@ -27,11 +28,21 @@ public class BridgeManager : MonoBehaviour
         var interactable = xrInteractionGroup?.focusInteractable;
         if (interactable != null)
         {
-            extendButton.gameObject.SetActive(interactable.transform.gameObject.GetComponent<BridgeExtendable>() != null);
+            var bridgeExtendableComponent = interactable.transform.gameObject.GetComponent<BridgeExtendable>();
+            if (bridgeExtendableComponent != null)
+            {
+                extendButton.gameObject.SetActive(true);
+                removeLastButton.gameObject.SetActive(bridgeExtendableComponent.HasSegments());
+            }
+            else
+            {
+                extendButton.gameObject.SetActive(false);
+            }
         }
         else
         {
             extendButton.gameObject.SetActive(false);
+            removeLastButton.gameObject.SetActive(false);
         }
     }
     
