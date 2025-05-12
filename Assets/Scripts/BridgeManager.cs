@@ -52,12 +52,21 @@ public class BridgeManager : MonoBehaviour
     public void ExtendBridgeButton()
     {
         var interactable = xrInteractionGroup?.focusInteractable;
-        if (interactable != null)
+        if (interactable == null) return;
+
+        if (interactable.transform
+            .TryGetComponent<BridgeExtendable>(out var bridgeExtendable))
         {
-            var obj = interactable.transform.gameObject;
-            if (obj.TryGetComponent<BridgeExtendable>(out var bridgeExtendable))
+            int cost = bridgeExtendable.segmentCost;
+
+            // try to deduct the cost first
+            if (BudgetManager.Instance.TrySpend(cost))
             {
                 bridgeExtendable.Extend();
+            }
+            else
+            {
+                Debug.LogWarning("Not enough budget to extend the bridge.");
             }
         }
     }
@@ -68,12 +77,19 @@ public class BridgeManager : MonoBehaviour
     public void RemoveLastBridgeSegmentButton()
     {
         var interactable = xrInteractionGroup?.focusInteractable;
-        if (interactable != null)
+        if (interactable == null) return;
+
+        if (interactable.transform
+            .TryGetComponent<BridgeExtendable>(out var bridgeExtendable))
         {
-            var obj = interactable.transform.gameObject;
-            if (obj.TryGetComponent<BridgeExtendable>(out var bridgeExtendable))
+            if (bridgeExtendable.HasSegments())
             {
+                // remove the segment
                 bridgeExtendable.RemoveLast();
+
+                // refund its cost
+                int refund = bridgeExtendable.segmentCost;
+                BudgetManager.Instance.Refund(refund);
             }
         }
     }

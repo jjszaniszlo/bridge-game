@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 0}
   finishPoint: {fileID: 0}
-  speed: 1
+  speed: 0.1
 --- !u!1001 &1189686794172181897
 PrefabInstance:
   m_ObjectHideFlags: 0

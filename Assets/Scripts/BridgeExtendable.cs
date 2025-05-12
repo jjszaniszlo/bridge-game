@@ -8,6 +8,8 @@ public class BridgeExtendable : MonoBehaviour
     public Transform extensionPoint;
     public GameObject visualGameObject;
 
+    public int segmentCost = 10;
+
     private BridgeNode _head;
     private BridgeNode _tail;
     private int _segmentCount;
@@ -71,4 +73,16 @@ public class BridgeExtendable : MonoBehaviour
             _tail = current;
         }
     }
+
+    /// <summary>
+    /// The world‐space Transform where vehicles should start.
+    /// </summary>
+    public Transform StartPoint => extensionPoint;
+
+    /// <summary>
+    /// The world‐space Transform of the furthest segment (or the extensionPoint if none).
+    /// </summary>
+    public Transform EndPoint => _tail != null 
+        ? _tail.transform 
+        : extensionPoint;
 }
