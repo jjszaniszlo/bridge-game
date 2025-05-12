@@ -2043,7 +2043,7 @@ RectTransform:
   m_GameObject: {fileID: 488051118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 207578792}
@@ -2051,7 +2051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -213.8, y: 150}
+  m_AnchoredPosition: {x: -213.8, y: 355}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &488051120
@@ -4052,18 +4052,22 @@ MonoBehaviour:
     startingBudget: 100
   - levelName: Level 2
     startingBudget: 150
+  - levelName: Level 3
+    startingBudget: 200
+  - levelName: Level 4
+    startingBudget: 250
   vehiclePrefab: {fileID: 8296567065558288078, guid: 03d42159469984d219ca6da8620a087a,
     type: 3}
-  vehicleStartPoint: {fileID: 1631852440423413380, guid: e92e009c634844f2fb7de5b92f9da64d,
-    type: 3}
-  vehicleFinishPoint: {fileID: 8550648678571598460, guid: 1f8a78c8b862648899a361b629d6c942,
-    type: 3}
+  vehicleStartPoint: {fileID: 0}
+  vehicleFinishPoint: {fileID: 0}
+  spawnHeightOffset: 0.24
+  arMenuManager: {fileID: 2099970472}
   levelCompletePanel: {fileID: 1364588493}
   levelCompleteText: {fileID: 454877629}
   nextButton: {fileID: 475186102}
+  testBridgeButton: {fileID: 488051120}
   gameOverPanel: {fileID: 412986114}
   restartButton: {fileID: 423918789}
-  arMenuManager: {fileID: 2099970472}
 --- !u!4 &1039355953
 Transform:
   m_ObjectHideFlags: 0
